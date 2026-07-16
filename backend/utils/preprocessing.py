@@ -1,7 +1,13 @@
 import re
-from nltk.corpus import stopwords
+import nltk
 
-STOPWORDS = set(stopwords.words("english"))
+try:
+    from nltk.corpus import stopwords
+    STOPWORDS = set(stopwords.words("english"))
+except LookupError:
+    nltk.download("stopwords")
+    from nltk.corpus import stopwords
+    STOPWORDS = set(stopwords.words("english"))
 
 def clean_text(text):
     if not isinstance(text, str):
